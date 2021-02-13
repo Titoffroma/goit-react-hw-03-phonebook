@@ -1,23 +1,27 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import Button from "../Button/ButtonStyled";
-import { Label, FormButton } from "./FormStyled";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import Button from '../Button/ButtonStyled';
+import { Label, FormButton } from './FormStyled';
 
 export default class Form extends Component {
   state = {
-    name: "",
-    number: "",
+    name: '',
+    number: '',
   };
+
   static propTypes = {
     handleSubmit: PropTypes.func.isRequired,
   };
-  clearValue = (e) => {
-    this.setState({ name: "", number: "" });
+
+  clearValue = e => {
+    this.setState({ name: '', number: '' });
     this.props.handleSubmit(e);
   };
-  handleChange = (e) => {
-    this.setState({ [e.target.getAttribute("id")]: e.target.value });
+
+  handleChange = e => {
+    this.setState({ [e.target.getAttribute('id')]: e.target.value });
   };
+
   render() {
     return (
       <form onSubmit={this.clearValue}>

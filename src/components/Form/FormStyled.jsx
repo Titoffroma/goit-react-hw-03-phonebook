@@ -1,11 +1,12 @@
-import styled from "styled-components";
-import Button from "../Button/ButtonStyled";
+import styled from 'styled-components';
+import Button from '../Button/ButtonStyled';
 
 const Label = styled.label`
   &:first-child {
     margin-right: 10px;
   }
 `;
+
 const FormButton = styled(Button)`
   margin-left: 10px;
   margin-top: 10px;

@@ -13,34 +13,43 @@ export default class App extends Component {
     contacts: load('Contacts') || [],
     filter: '',
   };
+
   handleSubmit = e => {
     e.preventDefault();
+
     const duplicate = this.state.contacts.find(
       contact => contact.name === e.target.elements[0].value,
     );
+
     if (duplicate) return alert(`${duplicate.name} is already in contacts`);
+
     const name = e.target.elements[0].value;
     const number = e.target.elements[1].value;
     const id = uuidv4();
+
     this.setState(prevState => {
       const contacts = [...prevState.contacts, { name, number, id }];
       save('Contacts', contacts);
       return { contacts };
     });
   };
+
   handleChangeFilter = e => {
     this.setState({ filter: e.target.value });
   };
+
   handleRemoveContact = e => {
-    const contacts = this.state.contacts.slice();
-    const toDel = contacts.find(contact => contact.id === e.target.dataset.id);
-    const index = contacts.indexOf(toDel);
-    contacts.splice(index, 1);
-    this.setState({
-      contacts,
+    this.setState(({ contacts }) => {
+      const newContacts = contacts.filter(
+        contact => contact.id !== e.target.dataset.id,
+      );
+      save('Contacts', newContacts);
+      return {
+        contacts: newContacts,
+      };
     });
-    save('Contacts', contacts);
   };
+
   render() {
     return (
       <>
